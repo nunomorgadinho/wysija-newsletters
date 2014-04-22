@@ -247,7 +247,9 @@ class WYSIJA_model_email extends WYSIJA_model{
         $donotsend=false;
         // if there's no article, do not send
         if((int)$emailChild['params']['autonl']['articles']['count'] === 0) {
-            $donotsend = true;
+            // filter to force the send even if there's no new articles
+            // useful if you don't want to use the automatic latest content block
+            $donotsend = apply_filters('wysija_donotsend', true);
         }
 
         // we send if not told to not do it
